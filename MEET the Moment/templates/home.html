@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MEET Moment</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/style.css') }}">
+		<!-- 
+			linking style.css to this html page. 
+		-->
+</head>
+<body>
+  <h1> me<div id="GFG">e</div>t the moment </h1>
+  <h5>me<div id="GFG">e</div>t the moment is a platform that opens up only for 10 random minutes a day! </h3>
+	<p>
+		in these 10 minutes everyone is allowed to post pictures and share their moment of this day <br>
+		as the day ends, these moments dissapear from others views and are saved only for thier prespective poster.
+	</p>
+
+	{% with messages = get_flashed_messages() %}
+		{% if messages and messages != [""] %}
+			<ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+	{% endwith %}
+		<!-- 
+			flash and flash meesages are unnecessary.
+			However, I am using them to show the user some feedback on their inputs.
+			the syntax is the same as writing python in html. weird but works. 
+		-->
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form method="post" action="/signup">
+			<h1>Create Account</h1>
+			<input name="name" type="text" placeholder="Name" />
+      <span>- this name will be seen by everyone</span>
+			<input name="email" type="email" placeholder="Email" />
+			<input name="password" type="password" placeholder="Password" />
+			<button>Sign Up</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form method="post" action="/signin">
+			<h1>Sign in</h1>
+			<input name="email" type="email" placeholder="Email" />
+			<input name="password" type="password" placeholder="Password" />
+			<button>Sign In</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>Please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start a journey with us</p>
+				<button class="ghost" id="signUp">Sign Up</button>
+			</div>
+		</div>
+	</div>
+</div>
+		<!-- 
+			both forms work more or less the same.
+			the major difference is in the action attribute of the <form> tag.
+		-->
+
+<script>
+  	const signUpButton = document.getElementById('signUp');
+	const signInButton = document.getElementById('signIn');
+	const container = document.getElementById('container');
+
+	signUpButton.addEventListener('click', () => {
+		container.classList.add("right-panel-active");
+	});
+
+	signInButton.addEventListener('click', () => {
+		container.classList.remove("right-panel-active");
+	});
+</script>
+	<!-- 
+		some javascript to impress you :)
+	-->
+</body>
+</html>
